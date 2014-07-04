@@ -34,29 +34,29 @@ function dRotate(e, dr) {
   if(mY <= height / 2) {                     // Top
     if(mX <= width / 2) {                      // Top left
       if(mX >= mY) {                             // Top left top
-        rotate(dr, "top");
+        rotate(dr, "tl");
       } else {                                   // Top left bottom
-        rotate(dr, "left");
+        rotate(dr, "lt");
       }
     } else {                                   // Top right
       if(mX + mY <= maxSide) {                   // Top right top
-        rotate(dr, "top");
+        rotate(dr, "tr");
       } else {                                   // Top right bottom
-        rotate(dr, "right");
+        rotate(dr, "rt");
       }
     }
   } else {                                  // Bottom
     if(mX <= width / 2) {                     // Bottom left
       if(mX + mY <= maxSide) {                   // Bottom left top
-        rotate(dr, "left");
+        rotate(dr, "lb");
       } else {                                   // Bottom left bottom
-        rotate(dr, "bottom");
+        rotate(dr, "bl");
       }
     } else {                                  // Bottom right
       if(mX - width / 2 >= mY - height / 2) {    // Bottom right top
-        rotate(dr, "right");
+        rotate(dr, "rb");
       } else {                                   // Bottom right bottom
-        rotate(dr, "bottom");
+        rotate(dr, "br");
       }
     }
   }
@@ -65,14 +65,30 @@ function dRotate(e, dr) {
 function rotate(dr, dir) {
   if(!isAnimating) {
     isAnimating = true;
-    if(dir == 'top') {
-        trans(dr, "rotateX(" + amount + "deg)");
-    } else if(dir == 'right') {
-      trans(dr, "rotateY(" + amount + "deg)");
-    } else if(dir == 'bottom') {
-        trans(dr, "rotateX(-" + amount + "deg)");
-    } else {
-        trans(dr, "rotateY(-" + amount + "deg)");
+    if(dir == 't') {
+      trans(dr, "rotateX(" + amount + "deg)");
+    } else if(dir == 'r') {
+    trans(dr, "rotateY(" + amount + "deg)"); 
+    } else if(dir == 'b') {
+      trans(dr, "rotateX(-" + amount + "deg)");
+    } else if(dir == 'l') {
+      trans(dr, "rotateY(-" + amount + "deg)");
+    } else if(dir == 'tl') {
+      trans(dr, "rotate3d(2, -1, 0, " + amount + "deg)");
+    } else if(dir == 'tr') {
+      trans(dr, "rotate3d(2, 1, 0, " + amount + "deg)");
+    } else if(dir == 'rt') {
+      trans(dr, "rotate3d(1, 2, 0, " + amount + "deg)");
+    } else if(dir == 'rb') {
+      trans(dr, "rotate3d(-1, 2, 0, " + amount + "deg)");
+    } else if(dir == 'br') {
+      trans(dr, "rotate3d(-2, 1, 0, " + amount + "deg)");
+    } else if(dir == 'bl') {
+      trans(dr, "rotate3d(-2, -1, 0, " + amount + "deg)");
+    } else if(dir == 'lb') {
+      trans(dr, "rotate3d(-1, -2, 0, " + amount + "deg)");
+    } else if(dir == 'lt') {
+      trans(dr, "rotate3d(1, -2, 0, " + amount + "deg)");
     }
   }
 }

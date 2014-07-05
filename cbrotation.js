@@ -1,13 +1,13 @@
-var drs = document.getElementsByClassName("directional-rotate"),
-    isAnimating = false, // LATER: Add individual ones
-    animElem,
-    type = "realistic", // Options: realistic, segmented, simple
-    transOrigin = 'opposite', // Besides the regular values, if type = "simple", "opposite" will also work
-    duration = .1, // In seconds
-    amount = 15, // Affects segmented & simple; In degrees
-    ease = "ease-out";
+var drs = document.getElementsByClassName("rot-dir"),
+    isAnimating = false,
+    animElem;
 
 for(var i = 0; i < drs.length; i++) { 
+  var dataSet = drs[i].dataset,
+      duration = dataSet.rotDur || .1,
+      ease = dataSet.rotEase || "ease-out",
+      transOrigin = dataSet.rotOrigin || "center center";
+  
   drs[i].style.webkitTransition = "-webkit-transform " + duration + "s " + ease;
   drs[i].style.MozTransition = "-moz-transform " + duration + "s " + ease;
   drs[i].style.msTransition = "-ms-transform " + duration + "s " + ease;
@@ -17,8 +17,11 @@ for(var i = 0; i < drs.length; i++) {
   transO(drs[i], transOrigin);
   
   drs[i].onmousedown = function(e) {
-    dRotate(e, this);
-    animElem = this;
+    if(!isAnimating) {
+        isAnimating = true;
+        dRotate(e, this);
+        animElem = this;
+    }
   }
 }
 
@@ -28,13 +31,15 @@ document.body.onmouseup = function() {
 }
 
 function dRotate(e, dr) {
-  var width = dr.clientWidth,
+  var dataSet = dr.dataset,
+      type = dataSet.rotType || "realistic",
+      
+      width = dr.clientWidth,
       height = dr.clientHeight,
       mX = e.clientX - dr.offsetLeft,
       mY = e.clientY - dr.offsetTop,
       midX = width / 2,
-      midY = height / 2,
-      maxSide = Math.max(width, height);
+      midY = height / 2;
   
   if(type == "realistic") {
     var dX = midX - mX,
@@ -47,60 +52,13 @@ function dRotate(e, dr) {
       myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) rotateY(" + -dX / 8 + "deg) rotateX(" + dY / 4 + "deg)"; 
     } else {
       myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) rotateY(" + -dX / 8 + "deg) rotateX(" + dY / 4 + "deg)"; 
-    }        
-    
+    }    
     trans(dr, myTrans);
-  } else if(type == "segmented") {
-    if(mX <= midX + width / 8 && mX >= midX - width / 8) { // CenterX
-      if(mY <= midY + height / 8 && mY >= midY - height / 8) { // Center center
-        rotate(dr, 'c');
-      } else {
-        if(mY <= midY) {  // Center top
-          rotate(dr, 't');
-        } else {
-          rotate(dr, 'b'); // Center bottom
-        }
-      }
-    } else if(mY <= midY + width / 8 && mY >= midX - width / 8) { // CenterY
-      if(mX <= midX) { 
-        rotate(dr, 'l'); // Center left
-      } else {
-        rotate(dr, 'r'); // Center right
-      }
-    }
-
-    if(mY <= midY) {                           // Top
-      if(mX <= width / 2) {                      // Top left
-        if(mX >= mY) {                             // Top left top
-          rotate(dr, "tl");
-        } else {                                   // Top left bottom
-          rotate(dr, "lt");
-        }
-      } else {                                   // Top right
-        if(mX + mY <= maxSide) {                   // Top right top
-          rotate(dr, "tr");
-        } else {                                   // Top right bottom
-          rotate(dr, "rt");
-        }
-      }
-    } else {                                  // Bottom
-      if(mX <= midX + width / 8 && mX >= midX - width / 8) { // Bottom center
-          rotate(dr, 'b');          
-      } else if(mX <= width / 2) {                     // Bottom left
-        if(mX + mY <= maxSide) {                   // Bottom left top
-          rotate(dr, "lb");
-        } else {                                   // Bottom left bottom
-          rotate(dr, "bl");
-        }
-      } else {                                  // Bottom right
-        if(mX - width / 2 >= mY - height / 2) {    // Bottom right top
-          rotate(dr, "rb");
-        } else {                                   // Bottom right bottom
-          rotate(dr, "br");
-        }
-      }
-    }
+      
   } else if(type == "simple") {
+    var maxSide = Math.max(width, height),
+        transOrigin = dataSet.rotOrigin || "center center";
+      
     if(mX <= midX + width / 8 && mX >= midX - width / 8 && mY <= midY + height / 8 && mY >= midY - height / 8) { // Center
         rotate(dr, 'c');
     } else if(mY <= height / 2) {              // Top
@@ -159,45 +117,27 @@ function dRotate(e, dr) {
   }
 }
 
-function rotate(dr, dir) {
-  if(!isAnimating) {
-    isAnimating = true;
-    if(dir == 'c') {
-      trans(dr, "translateZ(-" + amount + "px)");
-    } else if(dir == 't') {
-      trans(dr, "rotateX(" + amount + "deg)");
-    } else if(dir == 'r') {
+function rotate(dr, dir) {  
+  var amount = dr.dataset.rotAmount || 15;
+  if(dir == 'c') {
+    trans(dr, "translateZ(-" + amount + "px)");
+  } else if(dir == 't') {
+    trans(dr, "rotateX(" + amount + "deg)");
+  } else if(dir == 'r') {
     trans(dr, "rotateY(" + amount + "deg)"); 
-    } else if(dir == 'b') {
-      trans(dr, "rotateX(-" + amount + "deg)");
-    } else if(dir == 'l') {
-      trans(dr, "rotateY(-" + amount + "deg)");
-    } else if(dir == 'tl') {
-      trans(dr, "rotate3d(2, -1, 0, " + amount + "deg)");
-    } else if(dir == 'tr') {
-      trans(dr, "rotate3d(2, 1, 0, " + amount + "deg)");
-    } else if(dir == 'rt') {
-      trans(dr, "rotate3d(1, 2, 0, " + amount + "deg)");
-    } else if(dir == 'rb') {
-      trans(dr, "rotate3d(-1, 2, 0, " + amount + "deg)");
-    } else if(dir == 'br') {
-      trans(dr, "rotate3d(-2, 1, 0, " + amount + "deg)");
-    } else if(dir == 'bl') {
-      trans(dr, "rotate3d(-2, -1, 0, " + amount + "deg)");
-    } else if(dir == 'lb') {
-      trans(dr, "rotate3d(-1, -2, 0, " + amount + "deg)");
-    } else if(dir == 'lt') {
-      trans(dr, "rotate3d(1, -2, 0, " + amount + "deg)");
-    }
+  } else if(dir == 'b') {
+    trans(dr, "rotateX(-" + amount + "deg)");
+  } else if(dir == 'l') {
+    trans(dr, "rotateY(-" + amount + "deg)");
   }
 }
 
 function trans(dr, val) {
-  dr.style.webkitTransform = val;
-  dr.style.MozTransformTransform = val;
-  dr.style.msTransform = val;
-  dr.style.OTransform = val;
-  dr.style.transform = val;
+  dr.style.webkitTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.MozTransformTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.msTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.OTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.transform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
 }
 
 function transO(dr, val) {

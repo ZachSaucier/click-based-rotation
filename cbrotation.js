@@ -1,8 +1,8 @@
 var drs = document.getElementsByClassName("directional-rotate"),
     isAnimating = false, // LATER: Add individual ones
     animElem,
-    type = "simple", // Options: realistic, segmented, simple
-    transOrigin = 'center center',
+    type = "realistic", // Options: realistic, segmented, simple
+    transOrigin = 'opposite', // Besides the regular values, if type = "simple", "opposite" will also work
     duration = .1, // In seconds
     amount = 15, // Affects segmented & simple; In degrees
     ease = "ease-out";
@@ -14,11 +14,7 @@ for(var i = 0; i < drs.length; i++) {
   drs[i].style.OTransition = "-o-transform " + duration + "s " + ease;
   drs[i].style.transition = "transform " + duration + "s " + ease;
   
-  drs[i].style.webkitTransformOrigin = transOrigin;
-  drs[i].style.MozTransformOrigin = transOrigin;
-  drs[i].style.msTransformOrigin = transOrigin;
-  drs[i].style.OTransformOrigin = transOrigin;
-  drs[i].style.transformOrigin = transOrigin;
+  transO(drs[i], transOrigin);
   
   drs[i].onmousedown = function(e) {
     dRotate(e, this);
@@ -111,28 +107,52 @@ function dRotate(e, dr) {
       if(mX <= width / 2) {                      // Top left
         if(mX >= mY) {                             // Top left top
           rotate(dr, 't');
+          if(transOrigin == "opposite") {
+            transO(dr, 'bottom center');
+          }
         } else {                                   // Top left bottom
           rotate(dr, 'l');
+          if(transOrigin == "opposite") {
+            transO(dr, 'right center');
+          }
         }
       } else {                                   // Top right
         if(mX + mY <= maxSide) {                   // Top right top
           rotate(dr, 't');
+          if(transOrigin == "opposite") {
+            transO(dr, 'bottom center');
+          }
         } else {                                   // Top right bottom
           rotate(dr, 'r');
+          if(transOrigin == "opposite") {
+            transO(dr, 'left center');
+          }
         }
       }
     } else {                                  // Bottom
       if(mX <= width / 2) {                     // Bottom left
         if(mX + mY <= maxSide) {                   // Bottom left top
           rotate(dr, 'l');
+          if(transOrigin == "opposite") {
+            transO(dr, 'right center');
+          }
         } else {                                   // Bottom left bottom
           rotate(dr, 'b');
+          if(transOrigin == "opposite") {
+            transO(dr, 'top center');
+          }
         }
       } else {                                  // Bottom right
         if(mX - width / 2 >= mY - height / 2) {    // Bottom right top
           rotate(dr, 'r');
+          if(transOrigin == "opposite") {
+            transO(dr, 'left center');
+          }
         } else {                                   // Bottom right bottom
           rotate(dr, 'b');
+          if(transOrigin == "opposite") {
+            transO(dr, 'top center');
+          }
         }
       }
     }
@@ -178,4 +198,12 @@ function trans(dr, val) {
   dr.style.msTransform = val;
   dr.style.OTransform = val;
   dr.style.transform = val;
+}
+
+function transO(dr, val) {
+  dr.style.webkitTransformOrigin = val;
+  dr.style.MozTransformTransformOrigin = val;
+  dr.style.msTransformOrigin = val;
+  dr.style.OTransformOrigin = val;
+  dr.style.transformOrigin = val;
 }

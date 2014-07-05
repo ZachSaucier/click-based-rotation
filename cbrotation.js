@@ -56,7 +56,7 @@ function dRotate(e, dr) {
     trans(dr, myTrans);
   } else if(type == "segmented") {
     if(mX <= midX + width / 8 && mX >= midX - width / 8) { // CenterX
-      if(mY <= midY + width / 8 && mY >= midX - width / 8) { // Center center
+      if(mY <= midY + height / 8 && mY >= midY - height / 8) { // Center center
         rotate(dr, 'c');
       } else {
         if(mY <= midY) {  // Center top
@@ -105,7 +105,9 @@ function dRotate(e, dr) {
       }
     }
   } else if(type == "simple") {
-    if(mY <= height / 2) {                     // Top
+    if(mX <= midX + width / 8 && mX >= midX - width / 8 && mY <= midY + height / 8 && mY >= midY - height / 8) { // Center
+        rotate(dr, 'c');
+    } else if(mY <= height / 2) {              // Top
       if(mX <= width / 2) {                      // Top left
         if(mX >= mY) {                             // Top left top
           rotate(dr, 't');
@@ -141,7 +143,7 @@ function rotate(dr, dir) {
   if(!isAnimating) {
     isAnimating = true;
     if(dir == 'c') {
-      trans(dr, "translateZ(-" + amount / 2 + "px)");
+      trans(dr, "translateZ(-" + amount + "px)");
     } else if(dir == 't') {
       trans(dr, "rotateX(" + amount + "deg)");
     } else if(dir == 'r') {

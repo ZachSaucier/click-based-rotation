@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Click Based Rotation by ZachSaucier</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Click Based Rotation</h1>
+        <p>A project to try and rotate an element depending on where it is clicked</p>
+
+        <p class="view"><a href="https://github.com/ZachSaucier/ClickBasedRotation">View the Project on GitHub <small>ZachSaucier/ClickBasedRotation</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/ZachSaucier/ClickBasedRotation/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ZachSaucier/ClickBasedRotation/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ZachSaucier/ClickBasedRotation">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<ul>
+<li>Include the </li>
+<li>Add the <code>rot-dir</code> class to any elements you want to have the effect</li>
+<li>(optional) Set any of the data-attributes listed below you want</li>
+</ul><h3>
+<a name="data-attributes" class="anchor" href="#data-attributes"><span class="octicon octicon-link"></span></a>Data-attributes</h3>
+
+<p><code>rot-type</code> - Possible values: <code>realistic</code> (default) and <code>simple</code></p>
+
+<ul>
+<li>
+<code>realistic</code> bases the effect on a calculation of distance from the center</li>
+<li>
+<code>simple</code> has 1 of 5 preset effects based on where is clicked</li>
+</ul><p><code>rot-origin</code> -  The transform origin for the rotation occurring - defaults to <code>"center center"</code></p>
+
+<ul>
+<li>Accepts all default CSS <code>transform-origin</code> values using the same syntax</li>
+<li>Also accepts a value of <code>opposite</code> which, when the <code>rot-type</code> is <code>simple</code>, will set the <code>transform-origin</code> to the opposite of the rotation direction, creating a rotating door effect</li>
+</ul><p><code>rot-dur</code> - The duration, in seconds, of the total transition being applied - defaults to <code>.1</code></p>
+
+<p><code>rot-ease</code> - The easing function applied to the transition, all CSS easing values allowed - defaults to <code>ease-out</code></p>
+
+<p><code>rot-perspective</code> - Sets the perspective for the element's rotation - defaults to <code>400</code></p>
+
+<p><code>rot-amount</code> - <strong>Only applies to <code>simple</code> type</strong>. The number of degrees of which to turn each click - defaults to <code>15</code></p>
+
+<h3>
+<a name="example-usage" class="anchor" href="#example-usage"><span class="octicon octicon-link"></span></a>Example Usage</h3>
+
+<p>This will apply the effect using all of the default data values:</p>
+
+<pre><code>&lt;div class="rot-dir"&gt;This is a minimal example&lt;/div&gt;
+</code></pre>
+
+<p>This is an example using every attribute:</p>
+
+<pre><code>&lt;div class="rot-dir" data-rot-type="simple" 
+                     data-rot-origin="opposite" 
+                     data-rot-dur=".2" 
+                     data-rot-ease="ease-in-out" 
+                     data-rot-perspective="800" 
+                     data-rot-amount="10"
+&gt;This has every attribute used&lt;/div&gt;
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/ZachSaucier">ZachSaucier</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>

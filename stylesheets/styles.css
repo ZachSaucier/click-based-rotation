@@ -253,3 +253,26 @@ footer {
     color:#444;
   }
 }
+
+
+/* DEMO STYLES */
+.rot-dir {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  margin:50px auto;
+  width:300px;
+  height:300px;
+  background-color:teal;
+  color:white;
+  text-align:center;
+  font-size:35px;
+  font-family:Futura, Calibri, sans;
+  padding-top:120px;
+  
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

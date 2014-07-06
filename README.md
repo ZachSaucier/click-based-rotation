@@ -43,3 +43,7 @@ This is an example using every attribute:
                          data-rot-perspective="800" 
                          data-rot-amount="10"
     >This has every attribute used</div>
+
+#### Windows 8 Tile effect
+
+    <div class="rot-dir" data-rot-type="simple" data-rot-origin="opposite">I'm a Windows 8 tile</div>

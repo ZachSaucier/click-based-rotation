@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Click Based Rotation</h1>
-        <p>A project to try and rotate an element depending on where it is clicked</p>
+        <p>Rotate an element depending on the click location</p>
 
         <p class="view"><a href="https://github.com/ZachSaucier/ClickBasedRotation">View the Project on GitHub <small>ZachSaucier/ClickBasedRotation</small></a></p>
 
@@ -32,24 +32,24 @@
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <ul>
-<li>Include the </li>
+<li>Include the <code>cbrotation.js</code> or <code>cbrotation.min.js</code> file (usually at the bottom of the <code>body</code>)</li>
 <li>Add the <code>rot-dir</code> class to any elements you want to have the effect</li>
-<li>(optional) Set any of the data-attributes listed below you want</li>
+<li>(optional) Set any of the data-attributes listed below to valid, custom values</li>
 </ul><h3>
 <a name="data-attributes" class="anchor" href="#data-attributes"><span class="octicon octicon-link"></span></a>Data-attributes</h3>
 
-<p><code>rot-type</code> - Possible values: <code>realistic</code> (default) and <code>simple</code></p>
+<p><code>rot-type</code> - Possible values: <code>realistic</code> (default) and <code>simple</code> - <a href="http://zachsaucier.github.io/ClickBasedRotation/demo-type.html">Demo page</a></p>
 
 <ul>
 <li>
 <code>realistic</code> bases the effect on a calculation of distance from the center</li>
 <li>
 <code>simple</code> has 1 of 5 preset effects based on where is clicked</li>
-</ul><p><code>rot-origin</code> -  The transform origin for the rotation occurring - defaults to <code>"center center"</code></p>
+</ul><p><code>rot-origin</code> -  The transform origin for the rotation occurring - defaults to <code>"center center"</code> - <a href="http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html">Demo page</a></p>
 
 <ul>
 <li>Accepts all default CSS <code>transform-origin</code> values using the same syntax</li>
-<li>Also accepts a value of <code>opposite</code> which, when the <code>rot-type</code> is <code>simple</code>, will set the <code>transform-origin</code> to the opposite of the rotation direction, creating a rotating door effect</li>
+<li><strong>Only applies to <code>simple</code> type</strong>. Also accepts a value of <code>opposite</code> which will set the <code>transform-origin</code> to the opposite of the rotation direction, creating a rotating door effect</li>
 </ul><p><code>rot-dur</code> - The duration, in seconds, of the total transition being applied - defaults to <code>.1</code></p>
 
 <p><code>rot-ease</code> - The easing function applied to the transition, all CSS easing values allowed - defaults to <code>ease-out</code></p>

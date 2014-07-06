@@ -31,8 +31,9 @@ document.body.onmouseup = function() {
 }
 
 function dRotate(e, dr) {
-  var dataSet = dr.dataset,
+  var dataSet = dr.dataset,      
       type = dataSet.rotType || "realistic",
+      amount = dataSet.rotAmount || 15,
       
       width = dr.clientWidth,
       height = dr.clientHeight,
@@ -46,13 +47,7 @@ function dRotate(e, dr) {
         dY = midY - mY,
         maxD = midX + midY,
         d = Math.abs(dX) + Math.abs(dY),
-        myTrans;
-    console.log(mX + " " + mY);
-    if((dY < 0 && dX < 0) || (dY >= 0 && dX >= 0)) {
-      myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) rotateY(" + -dX / 8 + "deg) rotateX(" + dY / 4 + "deg)"; 
-    } else {
-      myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) rotateY(" + -dX / 8 + "deg) rotateX(" + dY / 4 + "deg)"; 
-    }    
+        myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) rotateY(" + -dX / 8 * amount / 15 + "deg) rotateX(" + dY / 4 * amount / 15 + "deg)";       
     trans(dr, myTrans);
       
   } else if(type == "simple") {
@@ -134,7 +129,7 @@ function rotate(dr, dir) {
 
 function trans(dr, val) {
   dr.style.webkitTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
-  dr.style.MozTransformTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.MozTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
   dr.style.msTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
   dr.style.OTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
   dr.style.transform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
@@ -142,7 +137,7 @@ function trans(dr, val) {
 
 function transO(dr, val) {
   dr.style.webkitTransformOrigin = val;
-  dr.style.MozTransformTransformOrigin = val;
+  dr.style.MozTransformOrigin = val;
   dr.style.msTransformOrigin = val;
   dr.style.OTransformOrigin = val;
   dr.style.transformOrigin = val;

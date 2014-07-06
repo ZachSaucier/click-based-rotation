@@ -1,7 +1,7 @@
 ClickBasedRotation
 ==================
 
-Rotate an element depending on the click location
+Rotate an element depending on the click location. Works without jQuery! Yay!
 
 ## Usage
  - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)
@@ -26,7 +26,16 @@ Rotate an element depending on the click location
 
 `rot-perspective` - Sets the perspective for the element's rotation - defaults to `400`
 
-`rot-amount` - **Only applies to `simple` type**. The number of degrees to turn each click - defaults to `15`
+`rot-amount` - The amount to turn each click - defaults to `15`
+
+ - When using it with `simple`,  it is directly the number of degrees to rotate each click
+ - When using it with `realistic`, it affects the value by the following
+
+:
+
+    myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) " +
+              "rotateY(" + -dX / 8 * amount / 15 + "deg) " +
+              "rotateX(" + dY / 4 * amount / 15 + "deg)";
 
 ### Example Usage
 
@@ -47,3 +56,5 @@ This is an example using every attribute:
 #### Windows 8 Tile effect
 
     <div class="rot-dir" data-rot-type="simple" data-rot-origin="opposite">I'm a Windows 8 tile</div>
+
+If you want the elements to rotate on mouse move instead, change the `.onmouseup` in the plugin's js to `onmousemove` or whatever you'd like then remove the `.onmouseup`

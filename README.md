@@ -1,24 +1,24 @@
 ClickBasedRotation
 ==================
 
-A project to try and rotate an element depending on where it is clicked
+Rotate an element depending on the click location
 
 ## Usage
- - Include the 
- - Add the `rot-dir` class to any elements you want to have the effect
- - (optional) Set any of the data-attributes listed below you want
+ - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)
+ - Add the `rot-dir` class to any element(s) you want to have the effect
+ - (optional) Set any of the data-attributes listed below to valid, custom values
 
 ### Data-attributes
 
-`rot-type` - Possible values: `realistic` (default) and `simple`
+`rot-type` - Possible values: `realistic` (default) and `simple` - [Demo page](http://zachsaucier.github.io/ClickBasedRotation/demo-type.html)
 
  - `realistic` bases the effect on a calculation of distance from the center
  - `simple` has 1 of 5 preset effects based on where is clicked
 
-`rot-origin` -  The transform origin for the rotation occurring - defaults to `"center center"`
+`rot-origin` -  The transform origin for the rotation occurring - defaults to `"center center"` - [Demo page](http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html)
 
  - Accepts all default CSS `transform-origin` values using the same syntax
- - Also accepts a value of `opposite` which, when the `rot-type` is `simple`, will set the `transform-origin` to the opposite of the rotation direction, creating a rotating door effect
+ - **Only applies to `simple` type**. Also accepts a value of `opposite` which will set the `transform-origin` to the opposite of the rotation direction, creating a rotating door effect
 
 `rot-dur` - The duration, in seconds, of the total transition being applied - defaults to `.1`
 
@@ -26,7 +26,7 @@ A project to try and rotate an element depending on where it is clicked
 
 `rot-perspective` - Sets the perspective for the element's rotation - defaults to `400`
 
-`rot-amount` - **Only applies to `simple` type**. The number of degrees of which to turn each click - defaults to `15`
+`rot-amount` - **Only applies to `simple` type**. The number of degrees to turn each click - defaults to `15`
 
 ### Example Usage
 

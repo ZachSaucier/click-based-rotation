@@ -36,8 +36,8 @@ function dRotate(e, dr) {
       
       width = dr.clientWidth,
       height = dr.clientHeight,
-      mX = e.clientX - dr.offsetLeft,
-      mY = e.clientY - dr.offsetTop,
+      mX = e.clientX - dr.offsetLeft  + document.body.scrollLeft,
+      mY = e.clientY - dr.offsetTop + document.body.scrollTop,
       midX = width / 2,
       midY = height / 2;
   
@@ -47,7 +47,7 @@ function dRotate(e, dr) {
         maxD = midX + midY,
         d = Math.abs(dX) + Math.abs(dY),
         myTrans;
-    
+    console.log(mX + " " + mY);
     if((dY < 0 && dX < 0) || (dY >= 0 && dX >= 0)) {
       myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) rotateY(" + -dX / 8 + "deg) rotateX(" + dY / 4 + "deg)"; 
     } else {

@@ -3,7 +3,12 @@ ClickBasedRotation
 
 Rotate an element depending on the click location. Works without jQuery! Yay!
 
-Check out the [Bruce Lee demo](http://codepen.io/Zeaklous/pen/AFEtL). It also works with [non-square shapes](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html).
+###Demos
+
+[Bruce Lee demo](http://codepen.io/Zeaklous/pen/AFEtL)
+[Non-square shapes demo](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html)
+[Rotation type demo](http://zachsaucier.github.io/ClickBasedRotation/demo-type.html)
+[Rotation origin demo](http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html)
 
 ## Usage
  - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)
@@ -44,7 +49,7 @@ Side note: If you want the elements to rotate on mouse move instead, you might l
 
 `rot-init` - The transform that the element goes to on start and after a click - defaults to `rotate(0deg)`
 
-`rot-start` - A function to call when the element is clicked
+`rot-start` - A function to call when the element is clicked - [demo page](http://codepen.io/Zeaklous/pen/AFEtL)
 
 `rot-end` - A function to call when the element is done being clicked
 

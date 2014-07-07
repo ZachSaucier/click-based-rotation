@@ -43,11 +43,13 @@ function dRotate(e, dr) {
       
       width = dr.clientWidth,
       height = dr.clientHeight,
-      mX = e.clientX - dr.offsetLeft  + document.body.scrollLeft,
-      mY = e.clientY - dr.offsetTop + document.body.scrollTop,
+      scrollX = parseInt((document.body.scrollLeft === 0) ? document.documentElement.scrollLeft : document.body.scrollLeft),
+      scrollY = parseInt((document.body.scrollTop === 0) ? document.documentElement.scrollTop : document.body.scrollTop),
+      mX = e.clientX - dr.offsetLeft  + scrollX,
+      mY = e.clientY - dr.offsetTop + scrollY,
       midX = width / 2,
       midY = height / 2;
-  console.log(mY)
+  
   if(type == "realistic") {
     var dX = midX - mX,
         dY = midY - mY,

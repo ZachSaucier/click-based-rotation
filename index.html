@@ -28,38 +28,55 @@
         </ul>
       </header>
       <section>
-        <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+        <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<h2>
+<a name="user-content-usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<ul>
+<ul class="task-list">
 <li>Include the <code>cbrotation.js</code> or <code>cbrotation.min.js</code> file (usually at the bottom of the <code>body</code>)</li>
-<li>Add the <code>rot-dir</code> class to any elements you want to have the effect</li>
+<li>Add the <code>rot-dir</code> class to any element(s) you want to have the effect</li>
 <li>(optional) Set any of the data-attributes listed below to valid, custom values</li>
-</ul><h3>
-<a name="data-attributes" class="anchor" href="#data-attributes"><span class="octicon octicon-link"></span></a>Data-attributes</h3>
+<li>You may want to also set <code>transform-style: preserve-3d</code> (with other prefixes) on the <code>rot-dir</code> element as well, depending on how you want it to feel</li>
+</ul><p>Side note: If you want the elements to rotate on mouse move instead, you might look at <a href="http://stackoverflow.com/questions/17790869/rotating-elements-according-to-cursor-position-with-jquery/17795610#17795610">this project</a></p>
+
+<h3>
+<a name="user-content-data-attributes" class="anchor" href="#data-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data-attributes</h3>
 
 <p><code>rot-type</code> - Possible values: <code>realistic</code> (default) and <code>simple</code> - <a href="http://zachsaucier.github.io/ClickBasedRotation/demo-type.html">Demo page</a></p>
 
-<ul>
+<ul class="task-list">
 <li>
 <code>realistic</code> bases the effect on a calculation of distance from the center</li>
 <li>
 <code>simple</code> has 1 of 5 preset effects based on where is clicked</li>
 </ul><p><code>rot-origin</code> -  The transform origin for the rotation occurring - defaults to <code>"center center"</code> - <a href="http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html">Demo page</a></p>
 
-<ul>
+<ul class="task-list">
 <li>Accepts all default CSS <code>transform-origin</code> values using the same syntax</li>
-<li><strong>Only applies to <code>simple</code> type</strong>. Also accepts a value of <code>opposite</code> which will set the <code>transform-origin</code> to the opposite of the rotation direction, creating a rotating door effect</li>
+<li>
+<strong>Only applies to <code>simple</code> type</strong>. Also accepts a value of <code>opposite</code> which will set the <code>transform-origin</code> to the opposite of the rotation direction, creating a rotating door effect</li>
 </ul><p><code>rot-dur</code> - The duration, in seconds, of the total transition being applied - defaults to <code>.1</code></p>
 
 <p><code>rot-ease</code> - The easing function applied to the transition, all CSS easing values allowed - defaults to <code>ease-out</code></p>
 
 <p><code>rot-perspective</code> - Sets the perspective for the element's rotation - defaults to <code>400</code></p>
 
-<p><code>rot-amount</code> - <strong>Only applies to <code>simple</code> type</strong>. The number of degrees of which to turn each click - defaults to <code>15</code></p>
+<p><code>rot-amount</code> - The amount to turn each click - defaults to <code>15</code></p>
+
+<ul class="task-list">
+<li>When using it with <code>simple</code>,  it is directly the number of degrees to rotate each click</li>
+<li>When using it with <code>realistic</code>, it affects the value by the following</li>
+</ul><p>:</p>
+
+<pre><code>myTrans = "translateZ(" + (-(maxD - d) / 8) + "px) " +
+          "rotateY(" + -dX / 8 * amount / 15 + "deg) " +
+          "rotateX(" + dY / 4 * amount / 15 + "deg)";
+</code></pre>
+
+<p><code>rot-init</code> - The transform that the element goes to on start and after a click - defaults to <code>rotate(0deg)</code></p>
 
 <h3>
-<a name="example-usage" class="anchor" href="#example-usage"><span class="octicon octicon-link"></span></a>Example Usage</h3>
+<a name="user-content-example-usage" class="anchor" href="#example-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Usage</h3>
 
 <p>This will apply the effect using all of the default data values:</p>
 
@@ -74,8 +91,15 @@
                      data-rot-ease="ease-in-out" 
                      data-rot-perspective="800" 
                      data-rot-amount="10"
+                     data-rot-init="rotate3d(1,1,0,10deg)"
 &gt;This has every attribute used&lt;/div&gt;
 </code></pre>
+
+<h4>
+<a name="user-content-windows-8-tile-effect" class="anchor" href="#windows-8-tile-effect" aria-hidden="true"><span class="octicon octicon-link"></span></a>Windows 8 Tile effect</h4>
+
+<pre><code>&lt;div class="rot-dir" data-rot-type="simple" data-rot-origin="opposite"&gt;I'm a Windows 8 tile&lt;/div&gt;
+</code></pre></article>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/ZachSaucier">ZachSaucier</a></p>

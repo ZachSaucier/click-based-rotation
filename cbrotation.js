@@ -11,6 +11,9 @@ for(var i = 0; i < drs.length; i++) {
   drs[i].dataset.rotInit = drs[i].dataset.rotInit || "rotate(0deg)";
   trans(drs[i], drs[i].dataset.rotInit);
     
+  drs[i].dataset.rotStart = drs[i].dataset.rotStart || "";
+  drs[i].dataset.rotEnd = drs[i].dataset.rotEnd || "";
+    
   drs[i].style.webkitTransition = "-webkit-transform " + duration + "s " + ease;
   drs[i].style.MozTransition = "-moz-transform " + duration + "s " + ease;
   drs[i].style.msTransition = "-ms-transform " + duration + "s " + ease;
@@ -25,6 +28,8 @@ for(var i = 0; i < drs.length; i++) {
   drs[i].onmousedown = function(e) {
     if(!isAnimating) {
         isAnimating = true;
+        if(this.dataset.rotStart !== "")
+          eval(this.dataset.rotStart + "()");
         dRotate(e, this);
         animElem = this;
     }
@@ -34,6 +39,8 @@ for(var i = 0; i < drs.length; i++) {
 document.body.onmouseup = function() {
   trans(animElem, animElem.dataset.rotInit);
   isAnimating = false;
+  if(this.dataset.rotEnd !== "")
+    eval(this.dataset.rotEnd + "()");
 }
 
 function dRotate(e, dr) {

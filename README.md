@@ -44,6 +44,10 @@ Side note: If you want the elements to rotate on mouse move instead, you might l
 
 `rot-init` - The transform that the element goes to on start and after a click - defaults to `rotate(0deg)`
 
+`rot-start` - A function to call when the element is clicked
+
+`rot-end` - A function to call when the element is done being clicked
+
 ### Example Usage
 
 This will apply the effect using all of the default data values:
@@ -59,6 +63,8 @@ This is an example using every attribute:
                          data-rot-perspective="800" 
                          data-rot-amount="10"
                          data-rot-init="rotate3d(1,1,0,10deg)"
+                         data-rot-start="atStart"
+                         data-rot-end="atEnd"
     >This has every attribute used</div>
 
 #### Windows 8 Tile effect

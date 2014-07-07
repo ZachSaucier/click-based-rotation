@@ -5,10 +5,10 @@ Rotate an element depending on the click location. Works without jQuery! Yay!
 
 ###Demos
 
-[Bruce Lee demo](http://codepen.io/Zeaklous/pen/AFEtL)
-[Non-square shapes demo](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html)
-[Rotation type demo](http://zachsaucier.github.io/ClickBasedRotation/demo-type.html)
-[Rotation origin demo](http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html)
+ - [Bruce Lee demo](http://codepen.io/Zeaklous/pen/AFEtL)
+ - [Non-square shapes demo](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html)
+ - [Rotation type demo](http://zachsaucier.github.io/ClickBasedRotation/demo-type.html)
+ - [Rotation origin demo](http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html)
 
 ## Usage
  - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)

@@ -7,6 +7,9 @@ Rotate an element depending on the click location. Works without jQuery! Yay!
  - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)
  - Add the `rot-dir` class to any element(s) you want to have the effect
  - (optional) Set any of the data-attributes listed below to valid, custom values
+ - You may want to also set `transform-style: preserve-3d` (with other prefixes) on the `rot-dir` element as well, depending on how you want it to feel
+
+Side note: If you want the elements to rotate on mouse move instead, you might look at [this project](http://stackoverflow.com/questions/17790869/rotating-elements-according-to-cursor-position-with-jquery/17795610#17795610)
 
 ### Data-attributes
 
@@ -37,6 +40,8 @@ Rotate an element depending on the click location. Works without jQuery! Yay!
               "rotateY(" + -dX / 8 * amount / 15 + "deg) " +
               "rotateX(" + dY / 4 * amount / 15 + "deg)";
 
+`rot-init` - The transform that the element goes to on start and after a click - defaults to `rotate(0deg)`
+
 ### Example Usage
 
 This will apply the effect using all of the default data values:
@@ -51,10 +56,9 @@ This is an example using every attribute:
                          data-rot-ease="ease-in-out" 
                          data-rot-perspective="800" 
                          data-rot-amount="10"
+                         data-rot-init="rotate3d(1,1,0,10deg)"
     >This has every attribute used</div>
 
 #### Windows 8 Tile effect
 
     <div class="rot-dir" data-rot-type="simple" data-rot-origin="opposite">I'm a Windows 8 tile</div>
-
-If you want the elements to rotate on mouse move instead, change the `.onmouseup` in the plugin's js to `onmousemove` or whatever you'd like then remove the `.onmouseup`

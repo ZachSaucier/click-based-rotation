@@ -8,11 +8,20 @@ for(var i = 0; i < drs.length; i++) {
       ease = dataSet.rotEase || "ease-out",
       transOrigin = dataSet.rotOrigin || "center center";
   
+  drs[i].dataset.rotInit = drs[i].dataset.rotInit || "rotate(0deg)";
+  trans(drs[i], drs[i].dataset.rotInit);
+    
   drs[i].style.webkitTransition = "-webkit-transform " + duration + "s " + ease;
   drs[i].style.MozTransition = "-moz-transform " + duration + "s " + ease;
   drs[i].style.msTransition = "-ms-transform " + duration + "s " + ease;
   drs[i].style.OTransition = "-o-transform " + duration + "s " + ease;
   drs[i].style.transition = "transform " + duration + "s " + ease;
+  
+  drs[i].style.webkitTransformStyle = "preserve-3d";
+  drs[i].style.MozTransformStyle = "preserve-3d";
+  drs[i].style.msTransformStyle = "preserve-3d";
+  drs[i].style.OTransformStyle = "preserve-3d";
+  drs[i].style.transformStyle = "preserve-3d";
   
   transO(drs[i], transOrigin);
   
@@ -26,7 +35,7 @@ for(var i = 0; i < drs.length; i++) {
 }
 
 document.body.onmouseup = function() {
-  trans(animElem, "rotate(0)");
+  trans(animElem, animElem.dataset.rotInit);
   isAnimating = false;
 }
 
@@ -127,12 +136,31 @@ function rotate(dr, dir) {
   }
 }
 
-function trans(dr, val) {
-  dr.style.webkitTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
-  dr.style.MozTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
-  dr.style.msTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
-  dr.style.OTransform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
-  dr.style.transform = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+function trans(dr, val) {  
+  // Apparently only webkit supports the perspective function...
+  // This is a fix for non-webkit browsers  
+  if((dr.style.MozTransform == "" && dr.style.transform == "") ||
+     (dr.style.msTransform == "" && dr.style.transform == "") ||
+     (dr.style.OTransform == "" && dr.style.transform == "")
+    ) {
+    dr.parentNode.style.perspective = (dr.getAttribute('data-rot-perspective') || 400) + "px";
+    dr.style.MozTransform = val;
+    dr.style.msTransform = val;
+    dr.style.OTransform = val;
+    dr.style.transform = val;
+  } else {
+    dr.style.MozTransform = val;
+    dr.style.msTransform = val;
+    dr.style.OTransform = val;
+    dr.style.transform = val;
+  }
+    
+  var val2 = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.webkitTransform = val2;
+  dr.style.MozTransform = val2;
+  dr.style.msTransform = val2;
+  dr.style.OTransform = val2;
+  dr.style.transform = val2;  
 }
 
 function transO(dr, val) {

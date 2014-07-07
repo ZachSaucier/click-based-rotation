@@ -3,7 +3,7 @@ ClickBasedRotation
 
 Rotate an element depending on the click location. Works without jQuery! Yay!
 
-It also works with [non-square shapes](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html).
+Check out the [Bruce Lee demo](http://codepen.io/Zeaklous/pen/AFEtL). It also works with [non-square shapes](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html).
 
 ## Usage
  - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)

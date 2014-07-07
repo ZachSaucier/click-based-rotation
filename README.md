@@ -1,7 +1,7 @@
 ClickBasedRotation
 ==================
 
-Rotate an element depending on the click location. Works without jQuery! Yay!
+Rotate an element depending on the click (or touch) location. Pure vanilla JS! Yay!
 
 ###Demos
 

@@ -1,6 +1,6 @@
 var drs = document.getElementsByClassName("rot-dir"),
     isAnimating = false,
-    animElem;
+    animElem = drs[0];
 
 for(var i = 0; i < drs.length; i++) { 
   var dataSet = drs[i].dataset,
@@ -10,9 +10,6 @@ for(var i = 0; i < drs.length; i++) {
   
   drs[i].dataset.rotInit = drs[i].dataset.rotInit || "rotate(0deg)";
   trans(drs[i], drs[i].dataset.rotInit);
-    
-  drs[i].dataset.rotStart = drs[i].dataset.rotStart || "";
-  drs[i].dataset.rotEnd = drs[i].dataset.rotEnd || "";
     
   drs[i].style.webkitTransition = "-webkit-transform " + duration + "s " + ease;
   drs[i].style.MozTransition = "-moz-transform " + duration + "s " + ease;
@@ -25,10 +22,10 @@ for(var i = 0; i < drs.length; i++) {
     
   transO(drs[i], transOrigin);
   
-  drs[i].onmousedown = function(e) {
+  drs[i].onmousedown = drs[i].ontouchstart =  function(e) {
     if(!isAnimating) {
         isAnimating = true;
-        if(this.dataset.rotStart !== "")
+        if(typeof this.dataset.rotStart !== 'undefined')
           eval(this.dataset.rotStart + "()");
         dRotate(e, this);
         animElem = this;
@@ -36,11 +33,23 @@ for(var i = 0; i < drs.length; i++) {
   }
 }
 
-document.body.onmouseup = function() {
+document.body.onmouseup = document.body.ontouchend = function() {
   trans(animElem, animElem.dataset.rotInit);
   isAnimating = false;
-  if(this.dataset.rotEnd !== "")
-    eval(this.dataset.rotEnd + "()");
+  if(typeof animElem.dataset.rotEnd !== 'undefined')
+    eval(animElem.dataset.rotEnd + "()");
+}
+
+window.onmousemove = function(e) {
+    var mX = e.pageX,
+        mY = e.pageY;
+    if ((mY >= 0 && mY <= window.innerHeight)
+      && (mX >= 0 && mX <= window.innerWidth))
+      return;
+    trans(animElem, animElem.dataset.rotInit);
+    isAnimating = false;
+    if(typeof animElem.dataset.rotEnd !== 'undefined')
+      eval(animElem.dataset.rotEnd + "()");
 }
 
 function dRotate(e, dr) {

@@ -16,13 +16,10 @@ for(var i = 0; i < drs.length; i++) {
   drs[i].style.msTransition = "-ms-transform " + duration + "s " + ease;
   drs[i].style.OTransition = "-o-transform " + duration + "s " + ease;
   drs[i].style.transition = "transform " + duration + "s " + ease;
-  
-  drs[i].style.webkitTransformStyle = "preserve-3d";
-  drs[i].style.MozTransformStyle = "preserve-3d";
-  drs[i].style.msTransformStyle = "preserve-3d";
-  drs[i].style.OTransformStyle = "preserve-3d";
-  drs[i].style.transformStyle = "preserve-3d";
-  
+
+  // Fix FF rendering error
+  drs[i].style.outline = "1px solid transparent";
+    
   transO(drs[i], transOrigin);
   
   drs[i].onmousedown = function(e) {
@@ -40,7 +37,7 @@ document.body.onmouseup = function() {
 }
 
 function dRotate(e, dr) {
-  var dataSet = dr.dataset,      
+  var dataSet = dr.dataset,
       type = dataSet.rotType || "realistic",
       amount = dataSet.rotAmount || 15,
       
@@ -50,7 +47,7 @@ function dRotate(e, dr) {
       mY = e.clientY - dr.offsetTop + document.body.scrollTop,
       midX = width / 2,
       midY = height / 2;
-  
+  console.log(mY)
   if(type == "realistic") {
     var dX = midX - mX,
         dY = midY - mY,
@@ -137,8 +134,7 @@ function rotate(dr, dir) {
 }
 
 function trans(dr, val) {  
-  // Apparently only webkit supports the perspective function...
-  // This is a fix for non-webkit browsers  
+    // Apparently only webkit supports the perspective function...
   if((dr.style.MozTransform == "" && dr.style.transform == "") ||
      (dr.style.msTransform == "" && dr.style.transform == "") ||
      (dr.style.OTransform == "" && dr.style.transform == "")
@@ -155,12 +151,12 @@ function trans(dr, val) {
     dr.style.transform = val;
   }
     
-  var val2 = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
-  dr.style.webkitTransform = val2;
-  dr.style.MozTransform = val2;
-  dr.style.msTransform = val2;
-  dr.style.OTransform = val2;
-  dr.style.transform = val2;  
+  val = "perspective(" + (dr.getAttribute('data-rot-perspective') || 400) + ") " + val;
+  dr.style.webkitTransform = val;
+  dr.style.MozTransform = val;
+  dr.style.msTransform = val;
+  dr.style.OTransform = val;
+  dr.style.transform = val;  
 }
 
 function transO(dr, val) {

@@ -59,10 +59,10 @@ function dRotate(e, dr) {
       
       width = dr.clientWidth,
       height = dr.clientHeight,
-      scrollX = parseInt((document.body.scrollLeft === 0) ? document.documentElement.scrollLeft : document.body.scrollLeft),
-      scrollY = parseInt((document.body.scrollTop === 0) ? document.documentElement.scrollTop : document.body.scrollTop),
-      mX = e.clientX - dr.offsetLeft  + scrollX,
-      mY = e.clientY - dr.offsetTop + scrollY,
+      scrollX = document.body.scrollLeft || document.documentElement.scrollLeft,
+      scrollY = document.body.scrollTop || document.documentElement.scrollTop,
+      mX = e.clientX - dr.getBoundingClientRect().left + scrollX,
+      mY = e.clientY - dr.getBoundingClientRect().top + scrollY,
       midX = width / 2,
       midY = height / 2;
   

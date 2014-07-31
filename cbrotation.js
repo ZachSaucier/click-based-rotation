@@ -59,10 +59,8 @@ function dRotate(e, dr) {
       
       width = dr.clientWidth,
       height = dr.clientHeight,
-      scrollX = document.body.scrollLeft || document.documentElement.scrollLeft,
-      scrollY = document.body.scrollTop || document.documentElement.scrollTop,
-      mX = e.clientX - dr.getBoundingClientRect().left + scrollX,
-      mY = e.clientY - dr.getBoundingClientRect().top + scrollY,
+      mX = e.clientX - dr.getBoundingClientRect().left,
+      mY = e.clientY - dr.getBoundingClientRect().top,
       midX = width / 2,
       midY = height / 2;
   
@@ -77,59 +75,59 @@ function dRotate(e, dr) {
   } else if(type == "simple") {
     var maxSide = Math.max(width, height),
         transOrigin = dataSet.rotOrigin || "center center";
-      
+    
     if(mX <= midX + width / 8 && mX >= midX - width / 8 && mY <= midY + height / 8 && mY >= midY - height / 8) { // Center
         rotate(dr, 'c');
     } else if(mY <= height / 2) {              // Top
       if(mX <= width / 2) {                      // Top left
-        if(mX >= mY) {                             // Top left top
-          rotate(dr, 't');
+        if(mX >= mY) {                             // Top left top          
           if(transOrigin == "opposite") {
             transO(dr, 'bottom center');
           }
-        } else {                                   // Top left bottom
-          rotate(dr, 'l');
+          rotate(dr, 't');
+        } else {                                   // Top left bottom          
           if(transOrigin == "opposite") {
             transO(dr, 'right center');
           }
+          rotate(dr, 'l');
         }
       } else {                                   // Top right
-        if(mX + mY <= maxSide) {                   // Top right top
-          rotate(dr, 't');
+        if(mX + mY <= maxSide) {                   // Top right top          
           if(transOrigin == "opposite") {
             transO(dr, 'bottom center');
           }
-        } else {                                   // Top right bottom
-          rotate(dr, 'r');
+          rotate(dr, 't');
+        } else {                                   // Top right bottom          
           if(transOrigin == "opposite") {
             transO(dr, 'left center');
           }
+          rotate(dr, 'r');
         }
       }
     } else {                                  // Bottom
       if(mX <= width / 2) {                     // Bottom left
-        if(mX + mY <= maxSide) {                   // Bottom left top
-          rotate(dr, 'l');
+        if(mX + mY <= maxSide) {                   // Bottom left top          
           if(transOrigin == "opposite") {
             transO(dr, 'right center');
           }
-        } else {                                   // Bottom left bottom
-          rotate(dr, 'b');
+          rotate(dr, 'l');
+        } else {                                   // Bottom left bottom          
           if(transOrigin == "opposite") {
             transO(dr, 'top center');
           }
+          rotate(dr, 'b');
         }
       } else {                                  // Bottom right
-        if(mX - width / 2 >= mY - height / 2) {    // Bottom right top
-          rotate(dr, 'r');
+        if(mX - width / 2 >= mY - height / 2) {    // Bottom right top          
           if(transOrigin == "opposite") {
             transO(dr, 'left center');
           }
-        } else {                                   // Bottom right bottom
-          rotate(dr, 'b');
+          rotate(dr, 'r');
+        } else {                                   // Bottom right bottom          
           if(transOrigin == "opposite") {
             transO(dr, 'top center');
           }
+          rotate(dr, 'b');
         }
       }
     }

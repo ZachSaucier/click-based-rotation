@@ -23,7 +23,7 @@
       
     transO(drs[i], transOrigin);
     
-    drs[i].addEventListener('mousedown', downListner, false);
+    drs[i].addEventListener('mousedown', downListener, false);
     drs[i].addEventListner('touchstart', downListener, false);  
   }
 

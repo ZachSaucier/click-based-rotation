@@ -23,19 +23,26 @@
       
     transO(drs[i], transOrigin);
     
-    drs[i].onmousedown = drs[i].ontouchstart =  function(e) {
-      if(!isAnimating) {
-          isAnimating = true;
-          if(typeof this.dataset.rotStart !== 'undefined')
-            eval(this.dataset.rotStart + "()");
-          dRotate(e, this);
-          animElem = this;
-      }
-    }
+    drs[i].addEventListener('mousedown', downListner, false);
+    drs[i].addEventListner('touchstart', downListener, false);  
   }
 
   document.body.addEventListener('mouseup', upListener, false);
   document.body.addEventListener('touchend', upListener, false);
+
+  window.addEventListener('mousemove', mouseMoveListener, false);
+
+  
+
+  function downListener(e) {
+    if(!isAnimating) {
+        isAnimating = true;
+        if(typeof this.dataset.rotStart !== 'undefined')
+          eval(this.dataset.rotStart + "()");
+        dRotate(e, this);
+        animElem = this;
+    }
+  }
 
   function upListener() {
     trans(animElem, animElem.dataset.rotInit);
@@ -43,8 +50,6 @@
     if(typeof animElem.dataset.rotEnd !== 'undefined')
       eval(animElem.dataset.rotEnd + "()");
   }
-
-  window.addEventListener('mousemove', mouseMoveListener, false);
 
   function mouseMoveListener(e) {
       var mX = e.pageX,

@@ -6,9 +6,9 @@ Rotate an element depending on the click (or touch) location. Pure vanilla JS! Y
 ###Demos
 
  - [Bruce Lee demo](http://codepen.io/Zeaklous/pen/AFEtL)
- - [Non-square shapes demo](http://zachsaucier.github.io/ClickBasedRotation/demo-shapes.html)
- - [Rotation type demo](http://zachsaucier.github.io/ClickBasedRotation/demo-type.html)
- - [Rotation origin demo](http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html)
+ - [Non-square shapes demo](http://zachsaucier.github.io/click-based-rotation/demo-shapes.html)
+ - [Rotation type demo](http://zachsaucier.github.io/click-based-rotation/demo-type.html)
+ - [Rotation origin demo](http://zachsaucier.github.io/click-based-rotation/demo-origin.html)
 
 ## Usage
  - Include the `cbrotation.js` or `cbrotation.min.js` file (usually at the bottom of the `body`)
@@ -20,12 +20,12 @@ Side note: If you want the elements to rotate on mouse move instead, you might l
 
 ### Data-attributes
 
-`rot-type` - Possible values: `realistic` (default) and `simple` - [Demo page](http://zachsaucier.github.io/ClickBasedRotation/demo-type.html)
+`rot-type` - Possible values: `realistic` (default) and `simple` - [Demo page](http://zachsaucier.github.io/click-based-rotation/demo-type.html)
 
  - `realistic` bases the effect on a calculation of distance from the center
  - `simple` has 1 of 5 preset effects based on where is clicked
 
-`rot-origin` -  The transform origin for the rotation occurring - defaults to `"center center"` - [Demo page](http://zachsaucier.github.io/ClickBasedRotation/demo-origin.html)
+`rot-origin` -  The transform origin for the rotation occurring - defaults to `"center center"` - [Demo page](http://zachsaucier.github.io/click-based-rotation/demo-origin.html)
 
  - Accepts all default CSS `transform-origin` values using the same syntax
  - **Only applies to `simple` type**. Also accepts a value of `opposite` which will set the `transform-origin` to the opposite of the rotation direction, creating a rotating door effect
